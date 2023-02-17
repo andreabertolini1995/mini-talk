@@ -2,7 +2,7 @@ NAME_SERVER = server
 NAME_CLIENT = client
 SOURCES_SERVER = server.c
 SOURCES_CLIENT = client.c
-PRINTF = ft_printf/ft_printf.a
+FT_PRINTF = ft_printf/ft_printf.a
 LIBFT = libft/libft.a
 OBJS_SERVER = $(SOURCES_SERVER:.c=.o)
 OBJS_CLIENT = $(SOURCES_CLIENT:.c=.o)
@@ -14,11 +14,11 @@ CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME_SERVER) $(NAME_CLIENT)
 
-$(NAME_SERVER): $(PRINTF) $(LIBFT) $(OBJS_SERVER)
-	$(CC) $(CFLAGS) $(OBJS_SERVER) $(PRINTF) $(LIBFT) $(INCLUDES) -o $(NAME_SERVER)
+$(NAME_SERVER): $(FT_PRINTF) $(LIBFT) $(OBJS_SERVER)
+	$(CC) $(CFLAGS) $(OBJS_SERVER) $(FT_PRINTF) $(LIBFT) $(INCLUDES) -o $(NAME_SERVER)
 
-$(NAME_CLIENT): $(PRINTF) $(LIBFT) $(OBJS_CLIENT) 
-	$(CC) $(CFLAGS) $(OBJS_CLIENT) $(PRINTF) $(LIBFT) $(INCLUDES) -o $(NAME_CLIENT)
+$(NAME_CLIENT): $(FT_PRINTF) $(LIBFT) $(OBJS_CLIENT) 
+	$(CC) $(CFLAGS) $(OBJS_CLIENT) $(FT_PRINTF) $(LIBFT) $(INCLUDES) -o $(NAME_CLIENT)
 
 $(LIBFT):
 	make -C libft
@@ -29,7 +29,7 @@ $(PRINTF):
 clean:
 	make -C libft clean
 	make -C ft_printf clean
-	$(RM) $(OBJS)
+	$(RM) $(OBJS_SERVER) $(OBJS_CLIENT)
 
 fclean: clean
 	make -C libft clean
