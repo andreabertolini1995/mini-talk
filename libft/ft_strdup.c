@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_is_printable.c                              :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abertoli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 17:33:54 by abertoli          #+#    #+#             */
-/*   Updated: 2022/10/21 18:29:38 by abertoli         ###   ########.fr       */
+/*   Created: 2022/10/26 14:27:37 by abertoli          #+#    #+#             */
+/*   Updated: 2022/10/26 14:27:38 by abertoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_talk.h"
+#include "libft.h"
 
-int main()
+char	*ft_strdup(const char *src)
 {
-    pid_t process_id;
+	char	*dest;
+	int		i;
 
-    process_id = getpid();
-    ft_printf("%d\n", process_id);
-    // kill(process_id, SIGUSR1);
-    pause();
-    return (0);
+	dest = (char *) malloc (ft_strlen(src) + 1);
+	if (dest == NULL)
+		return (NULL);
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }

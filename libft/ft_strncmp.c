@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_is_printable.c                              :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abertoli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 17:33:54 by abertoli          #+#    #+#             */
-/*   Updated: 2022/10/21 18:29:38 by abertoli         ###   ########.fr       */
+/*   Created: 2022/10/19 17:18:22 by abertoli          #+#    #+#             */
+/*   Updated: 2022/10/19 17:18:23 by abertoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_talk.h"
+#include "libft.h"
 
-int main()
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-    pid_t process_id;
+	unsigned int	i;
+	unsigned char	*str1;
+	unsigned char	*str2;
 
-    process_id = getpid();
-    ft_printf("%d\n", process_id);
-    // kill(process_id, SIGUSR1);
-    pause();
-    return (0);
+	str1 = (unsigned char *) s1;
+	str2 = (unsigned char *) s2;
+	i = 0;
+	while ((str1[i] != '\0' || str2[i] != '\0') && i < n)
+	{
+		if (str1[i] != str2[i])
+			return (str1[i] - str2[i]);
+		i++;
+	}
+	return (0);
 }

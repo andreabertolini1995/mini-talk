@@ -10,18 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "client.h"
-#include "ft_printf/ft_printf.h"
-#include "libft/libft.h"
+#include "mini_talk.h"
 
 int main(int argc, char **argv)
 {
-    int     serverPID;
+    pid_t   server_pid;
     char    *str;
 
-    serverPID = ft_atoi(argv[1]);
+    server_pid = ft_atoi(argv[1]);
     str = argv[2];
-    ft_printf("%d\n", argc);
+    ft_printf("Number of arguments: %d\n", argc - 1);
+    ft_printf("Server PID: %d\n", server_pid);
+    ft_printf("String: %s\n", str);
+    ft_printf("Signal: %d\n", kill(server_pid, SIGUSR1));
+    pause();
+    signal(SIGUSR1, SIG_IGN); //handling the signals
     
     return (0);
 }

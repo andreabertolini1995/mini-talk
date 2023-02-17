@@ -10,15 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_talk.h"
+#include "libft.h"
 
-int main()
+void	*ft_memset(void *s, int c, size_t n)
 {
-    pid_t process_id;
+	size_t	i;
+	char	*sptr;
 
-    process_id = getpid();
-    ft_printf("%d\n", process_id);
-    // kill(process_id, SIGUSR1);
-    pause();
-    return (0);
+	sptr = (char *) s;
+	i = 0;
+	while (i < n)
+	{
+		sptr[i] = c;
+		i++;
+	}
+	return (s);
 }

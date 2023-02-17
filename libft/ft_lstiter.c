@@ -10,15 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_talk.h"
+#include "libft.h"
 
-int main()
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-    pid_t process_id;
-
-    process_id = getpid();
-    ft_printf("%d\n", process_id);
-    // kill(process_id, SIGUSR1);
-    pause();
-    return (0);
+	while (lst != NULL)
+	{
+		(*f)(lst->content);
+		lst = lst->next;
+	}
 }

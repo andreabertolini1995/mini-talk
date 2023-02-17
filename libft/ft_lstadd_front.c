@@ -10,15 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_talk.h"
+#include "libft.h"
 
-int main()
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-    pid_t process_id;
-
-    process_id = getpid();
-    ft_printf("%d\n", process_id);
-    // kill(process_id, SIGUSR1);
-    pause();
-    return (0);
+	if (lst != NULL)
+	{
+		if (*lst != NULL)
+			new->next = *lst;
+		*lst = new;
+	}
 }

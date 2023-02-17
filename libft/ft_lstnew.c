@@ -10,15 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_talk.h"
+#include "libft.h"
 
-int main()
+t_list	*ft_lstnew(void *content)
 {
-    pid_t process_id;
+	t_list	*tmp;
 
-    process_id = getpid();
-    ft_printf("%d\n", process_id);
-    // kill(process_id, SIGUSR1);
-    pause();
-    return (0);
+	tmp = malloc (sizeof(t_list));
+	if (tmp == NULL)
+		return (NULL);
+	tmp->content = content;
+	tmp->next = NULL;
+	return (tmp);
 }

@@ -10,15 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_talk.h"
+#include "libft.h"
 
-int main()
+void	ft_putnbr_fd(int n, int fd)
 {
-    pid_t process_id;
-
-    process_id = getpid();
-    ft_printf("%d\n", process_id);
-    // kill(process_id, SIGUSR1);
-    pause();
-    return (0);
+	if (n == -2147483648)
+		write(fd, "-2147483648", 11);
+	else if (n >= 0 && n < 10)
+	{
+		ft_putchar_fd(n + 48, fd);
+	}
+	else if (n >= 10)
+	{
+		ft_putnbr_fd(n / 10, fd);
+		ft_putchar_fd((n % 10) + 48, fd);
+	}
+	else if (n < 0)
+	{
+		ft_putchar_fd(45, fd);
+		ft_putnbr_fd(-n, fd);
+	}
 }

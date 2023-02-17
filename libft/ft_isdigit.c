@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_is_printable.c                              :+:      :+:    :+:   */
+/*   ft_str_is_alpha.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abertoli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 17:33:54 by abertoli          #+#    #+#             */
-/*   Updated: 2022/10/21 18:29:38 by abertoli         ###   ########.fr       */
+/*   Created: 2022/10/18 16:02:24 by abertoli          #+#    #+#             */
+/*   Updated: 2022/10/18 16:02:25 by abertoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_talk.h"
+#include "libft.h"
 
-int main()
+int	ft_isdigit(int c)
 {
-    pid_t process_id;
-
-    process_id = getpid();
-    ft_printf("%d\n", process_id);
-    // kill(process_id, SIGUSR1);
-    pause();
-    return (0);
+	if (c >= '0' && c <= '9')
+		return (2048);
+	return (0);
 }

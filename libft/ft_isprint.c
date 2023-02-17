@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERVER_H
-# define SERVER_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <sys/types.h>
-# include <signal.h>
-
-#endif
+int	ft_isprint(int c)
+{
+	if (c >= 32 && c <= 126)
+		return (16384);
+	return (0);
+}

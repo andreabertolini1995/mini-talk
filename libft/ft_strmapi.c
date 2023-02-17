@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_is_printable.c                              :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abertoli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 17:33:54 by abertoli          #+#    #+#             */
-/*   Updated: 2022/10/21 18:29:38 by abertoli         ###   ########.fr       */
+/*   Created: 2022/10/19 17:18:22 by abertoli          #+#    #+#             */
+/*   Updated: 2022/10/19 17:18:23 by abertoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_talk.h"
+#include "libft.h"
 
-int main()
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-    pid_t process_id;
+	int		i;
+	char	*str;
 
-    process_id = getpid();
-    ft_printf("%d\n", process_id);
-    // kill(process_id, SIGUSR1);
-    pause();
-    return (0);
+	str = (char *) malloc (sizeof(char) * ft_strlen(s) + 1);
+	if (str == NULL)
+		return (NULL);
+	i = 0;
+	while (s[i] != '\0')
+	{
+		str[i] = (*f)(i, s[i]);
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
 }

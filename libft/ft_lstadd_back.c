@@ -10,15 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_talk.h"
+#include "libft.h"
 
-int main()
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-    pid_t process_id;
+	t_list	*last_node;
 
-    process_id = getpid();
-    ft_printf("%d\n", process_id);
-    // kill(process_id, SIGUSR1);
-    pause();
-    return (0);
+	if ((*lst) == NULL)
+	{
+		new->next = NULL;
+		*lst = new;
+	}
+	else
+	{
+		last_node = ft_lstlast(*lst);
+		last_node->next = new;
+	}
 }

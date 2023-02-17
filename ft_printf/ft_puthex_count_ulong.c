@@ -10,15 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_talk.h"
+#include "ft_printf.h"
 
-int main()
+static int	ft_puthex_strncmp(unsigned long n, char *letter_size)
 {
-    pid_t process_id;
+	int	count;
 
-    process_id = getpid();
-    ft_printf("%d\n", process_id);
-    // kill(process_id, SIGUSR1);
-    pause();
-    return (0);
+	count = 0;
+	if (n <= 9)
+		count = count + ft_putnbr_count(n);
+	else if (!ft_strncmp(letter_size, "lowercase", ft_strlen(letter_size)))
+		count = count + ft_putchar_count(n + 87);
+	else if (!ft_strncmp(letter_size, "uppercase", ft_strlen(letter_size)))
+		count = count + ft_putchar_count(n + 55);
+	return (count);
+}
+
+int	ft_puthex_count_ulong(unsigned long n, char *letter_size, int binary_size)
+{
+	int	count;
+
+	if (n < 16)
+		count = ft_puthex_strncmp(n, letter_size);
+	else
+	{
+		count = ft_puthex_count_ulong(n / 16, letter_size, binary_size);
+		count = count + ft_puthex_strncmp(n % 16, letter_size);
+	}
+	return (count);
 }

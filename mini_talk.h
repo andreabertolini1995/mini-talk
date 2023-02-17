@@ -10,15 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_talk.h"
+#ifndef MINI_TALK_H
+# define MINI_TALK_H
 
-int main()
-{
-    pid_t process_id;
+# include <unistd.h>
+# include <sys/types.h>
+# include <signal.h>
+# include "ft_printf/ft_printf.h"
+# include "libft/libft.h"
 
-    process_id = getpid();
-    ft_printf("%d\n", process_id);
-    // kill(process_id, SIGUSR1);
-    pause();
-    return (0);
-}
+#endif

@@ -10,15 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_talk.h"
+#include "libft.h"
 
-int main()
+void	*ft_calloc(size_t n, size_t size)
 {
-    pid_t process_id;
+	void	*str;
 
-    process_id = getpid();
-    ft_printf("%d\n", process_id);
-    // kill(process_id, SIGUSR1);
-    pause();
-    return (0);
+	str = malloc (n * size);
+	if (str == NULL)
+		return (NULL);
+	ft_bzero(str, n * size);
+	return (str);
 }
