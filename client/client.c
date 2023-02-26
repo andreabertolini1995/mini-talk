@@ -12,19 +12,47 @@
 
 #include "mini_talk.h"
 
-int main(int argc, char **argv)
+static void	send_signals(int *binary, int binary_size, int server_pid)
 {
-    pid_t   server_pid;
-    char    *str;
+	int	i;
 
-    server_pid = ft_atoi(argv[1]);
-    str = argv[2];
-    ft_printf("Number of arguments: %d\n", argc - 1);
-    ft_printf("Server PID: %d\n", server_pid);
-    ft_printf("String: %s\n", str);
-    ft_printf("Signal: %d\n", kill(server_pid, SIGUSR1));
-    pause();
-    signal(SIGUSR1, SIG_IGN); //handling the signals
-    
-    return (0);
+	i = 0;
+	while (i < binary_size)
+	{
+		if (binary[i] == 0)
+			kill(server_pid, SIGUSR1);
+		else
+			kill(server_pid, SIGUSR2);
+		i++;
+		usleep(100);
+	}
+}
+
+static void	ascii_to_binary(char *str, int binary_size, int server_pid)
+{
+	int	i;
+	int	*binary;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		binary = ft_dec_to_binary(str[i], binary_size);
+		send_signals(binary, binary_size, server_pid);
+		i++;
+	}
+	free(binary);
+}
+
+int	main(int argc, char **argv)
+{
+	pid_t	server_pid;
+	char	*str;
+	int		binary_size;
+
+	(void) argc;
+	binary_size = 8;
+	server_pid = ft_atoi(argv[1]);
+	str = argv[2];
+	ascii_to_binary(str, binary_size, server_pid);
+	return (0);
 }
