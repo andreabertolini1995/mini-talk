@@ -38,9 +38,9 @@ static void	ascii_to_binary(char *str, int binary_size, int server_pid)
 	{
 		binary = ft_dec_to_binary(str[i], binary_size);
 		send_signals(binary, binary_size, server_pid);
+		free(binary);
 		i++;
 	}
-	free(binary);
 }
 
 int	main(int argc, char **argv)

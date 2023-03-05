@@ -12,14 +12,12 @@
 
 #include "mini_talk.h"
 
-int	*g_signals;
-
-static void	initialize_array(int *arr, int binary_size)
+static void	initialize_array(int *arr)
 {
 	int	i;
 
 	i = 0;
-	while (i < binary_size)
+	while (i < 8)
 	{
 		arr[i] = -1;
 		i++;
@@ -44,27 +42,29 @@ static int	ft_binary_to_dec(int *binary, int binary_size)
 	return (n);
 }
 
-static void	store_signals(int n)
+static void	store_signals(int n, int signals[8])
 {
 	int	i;
 
 	i = 0;
-	while (g_signals[i] != -1)
+	while (signals[i] != -1)
 		i++;
-	g_signals[i] = n;
+	signals[i] = n;
 	if (i == 7)
 	{
-		ft_printf("%c", ft_binary_to_dec(g_signals, 8));
-		initialize_array(g_signals, 8);
+		ft_printf("%c", ft_binary_to_dec(signals, 8));
+		initialize_array(signals);
 	}
 }
 
 static void	sig_handler(int signo)
 {
+	static int	signals[8] = {-1, -1, -1, -1, -1, -1, -1, -1};
+
 	if (signo == SIGUSR1)
-		store_signals(0);
+		store_signals(0, signals);
 	else if (signo == SIGUSR2)
-		store_signals(1);
+		store_signals(1, signals);
 	pause();
 }
 
@@ -72,13 +72,7 @@ int	main(void)
 {
 	pid_t				process_id;
 	struct sigaction	sigact;
-	int					binary_size;
 
-	binary_size = 8;
-	g_signals = (int *) malloc (sizeof(int) * binary_size);
-	if (g_signals == NULL)
-		return (0);
-	initialize_array(g_signals, binary_size);
 	sigemptyset(&sigact.sa_mask);
 	sigact.sa_flags = 0;
 	sigact.sa_flags = sigact.sa_flags | SA_NODEFER;
@@ -88,6 +82,5 @@ int	main(void)
 	process_id = getpid();
 	ft_printf("%d\n", process_id);
 	pause();
-	free(g_signals);
 	return (0);
 }
