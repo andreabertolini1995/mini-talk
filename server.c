@@ -12,59 +12,20 @@
 
 #include "mini_talk.h"
 
-static void	initialize_array(int *arr)
-{
-	int	i;
-
-	i = 0;
-	while (i < 8)
-	{
-		arr[i] = -1;
-		i++;
-	}
-}
-
-static int	ft_binary_to_dec(int *binary, int binary_size)
-{
-	int	i;
-	int	n;
-
-	n = 0;
-	i = 0;
-	while (i < binary_size)
-	{
-		if (binary[i] == 1)
-			n = n * 2 + 1;
-		else if (binary[i] == 0)
-			n = n * 2;
-		i++;
-	}
-	return (n);
-}
-
-static void	store_signals(int n, int signals[8])
-{
-	int	i;
-
-	i = 0;
-	while (signals[i] != -1)
-		i++;
-	signals[i] = n;
-	if (i == 7)
-	{
-		ft_printf("%c", ft_binary_to_dec(signals, 8));
-		initialize_array(signals);
-	}
-}
-
 static void	sig_handler(int signo)
 {
-	static int	signals[8] = {-1, -1, -1, -1, -1, -1, -1, -1};
+	static int	n = 0;
+	static int	number_signals = 0;
 
-	if (signo == SIGUSR1)
-		store_signals(0, signals);
-	else if (signo == SIGUSR2)
-		store_signals(1, signals);
+	if (signo == SIGUSR2)
+		n = n | (128 >> number_signals);
+	number_signals++;
+	if (number_signals == 8)
+	{
+		ft_printf("%c", n);
+		number_signals = 0;
+		n = 0;
+	}
 	pause();
 }
 
