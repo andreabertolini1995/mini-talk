@@ -26,7 +26,6 @@ static void	sig_handler(int signo)
 		number_signals = 0;
 		n = 0;
 	}
-	pause();
 }
 
 int	main(void)
@@ -42,6 +41,6 @@ int	main(void)
 	sigaction(SIGUSR2, &sigact, NULL);
 	process_id = getpid();
 	ft_printf("%d\n", process_id);
-	pause();
+	while(42);
 	return (0);
 }
