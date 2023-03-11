@@ -37,10 +37,12 @@ int	main(void)
 	sigact.sa_flags = 0;
 	sigact.sa_flags = sigact.sa_flags | SA_NODEFER;
 	sigact.sa_handler = sig_handler;
-	sigaction(SIGUSR1, &sigact, NULL);
-	sigaction(SIGUSR2, &sigact, NULL);
 	process_id = getpid();
 	ft_printf("%d\n", process_id);
-	while(42);
+	while (42)
+	{
+		sigaction(SIGUSR1, &sigact, NULL);
+		sigaction(SIGUSR2, &sigact, NULL);
+	}
 	return (0);
 }
